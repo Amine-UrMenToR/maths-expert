@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maths Expert — Plateforme d'Excellence Mathématique</title>
+  <meta name="description" content="Maths Expert est la plateforme éducative de référence en mathématiques. Suivez des cours de qualité, regardez des vidéos et progressez à votre rythme."/>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <style>
+    .floating-shape {
+      position: absolute; border-radius: 50%; opacity: .08;
+      background: radial-gradient(circle, rgba(167,139,250,1) 0%, transparent 70%);
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-30px) rotate(5deg)} }
+    .count-up { display: inline-block; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.15); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.25); border-radius: 50px;
+      padding: .4rem 1rem; font-size: .85rem; color: rgba(255,255,255,.9);
+      margin-bottom: 1.5rem; font-weight: 500;
+    }
+    .hero-badge span { background: var(--accent); border-radius: 50px; padding: .1rem .6rem; font-size: .78rem; font-weight: 700; color: var(--primary-darker); }
+    .floating-card {
+      background: rgba(255,255,255,.12); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.2); border-radius: 18px; padding: 1.25rem; color: white;
+    }
+    .floating-card .card-title { font-size: .82rem; opacity: .7; margin-bottom: .4rem; }
+    .floating-card .card-value { font-size: 1.5rem; font-weight: 800; font-family: var(--font-display); }
+    .floating-card .card-sub { font-size: .78rem; opacity: .7; margin-top: .3rem; }
+    .floating-card .progress-mini { height: 4px; background: rgba(255,255,255,.2); border-radius: 99px; margin-top: .5rem; overflow: hidden; }
+    .floating-card .progress-mini-fill { height: 100%; background: linear-gradient(90deg, #C4B5FD, #A78BFA); border-radius: 99px; }
+    .subject-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.5rem; }
+    .chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 50px; padding: .3rem .85rem; font-size: .82rem; color: rgba(255,255,255,.85); }
+    /* Scroll indicator */
+    .scroll-hint { text-align: center; margin-top: 3rem; color: rgba(255,255,255,.5); font-size: .85rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <div class="logo-icon">∑</div>
+    Maths Expert
+  </div>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#how">Comment ça marche</a>
+    <a href="#testimonials">Témoignages</a>
+  </div>
+  <div class="nav-actions">
+    <a href="/login.html" class="btn btn-ghost">Se connecter</a>
+    <a href="/register.html" class="btn btn-primary">Commencer gratuitement</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="floating-shape" style="width:700px;height:700px;top:-200px;right:-200px;"></div>
+  <div class="floating-shape" style="width:400px;height:400px;bottom:-100px;left:5%;animation-delay:3s;"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span>NOUVEAU</span> Plateforme 2026 — Cours interactifs disponibles
+      </div>
+      <h1>Maîtrisez les <span>Mathématiques</span> avec les meilleurs experts</h1>
+      <p>Une plateforme éducative complète avec des cours structurés, des vidéos pédagogiques et une communauté d'apprentissage active. Pour les étudiants et les professeurs.</p>
+      <div class="hero-buttons">
+        <a href="/register.html?role=student" class="btn btn-white btn-lg">🎓 Je suis étudiant</a>
+        <a href="/register.html?role=professor" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:white;">👩‍🏫 Je suis professeur</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num" id="stat-students">0</div>
+          <div class="label">Étudiants actifs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" id="stat-courses">0</div>
+          <div class="label">Cours disponibles</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" id="stat-profs">0</div>
+          <div class="label">Professeurs experts</div>
+        </div>
+      </div>
+      <div class="subject-chips">
+        <span class="chip">📐 Géométrie</span><span class="chip">∫ Analyse</span>
+        <span class="chip">∑ Algèbre</span><span class="chip">π Trigonométrie</span>
+        <span class="chip">📊 Statistiques</span><span class="chip">🔢 Arithmétique</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-cards-stack">
+        <div class="floating-card main" style="position:absolute;top:0;left:0;width:300px;animation:float 6s ease-in-out infinite">
+          <div class="card-title">📚 Cours en cours</div>
+          <div class="card-value">Analyse Réelle</div>
+          <div class="card-sub">Chapitre 4 — Intégrales</div>
+          <div class="progress-mini" style="margin-top:.8rem">
+            <div class="progress-mini-fill" style="width:65%"></div>
+          </div>
+          <div class="card-sub" style="margin-top:.3rem">65% complété</div>
+        </div>
+        <div class="floating-card" style="position:absolute;bottom:30px;right:-20px;width:220px;animation:float 6s ease-in-out infinite reverse;animation-delay:1.5s;background:rgba(167,139,250,.25)">
+          <div class="card-title">🏆 Votre progression</div>
+          <div class="card-value" style="color:#C4B5FD">+24 pts</div>
+          <div class="card-sub">Cette semaine</div>
+        </div>
+        <div class="floating-card" style="position:absolute;top:200px;left:-30px;width:190px;animation:float 7s ease-in-out infinite;animation-delay:2s;background:rgba(124,58,237,.3)">
+          <div class="card-title">💬 Nouveau message</div>
+          <div class="card-sub">Prof. Martin vous a répondu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="background:var(--white)">
+  <div class="section-inner">
+    <div class="section-label">✨ Fonctionnalités</div>
+    <h2 class="section-title">Tout ce dont vous avez besoin pour <span>réussir</span></h2>
+    <p class="section-subtitle">Une plateforme pensée pour les étudiants et les professeurs, avec toutes les outils pour un apprentissage de qualité.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h4>Cours Structurés</h4>
+        <p>Des cours rédigés par des professeurs experts, organisés par niveaux et thématiques. Progressez à votre rythme.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎥</div>
+        <h4>Vidéos Pédagogiques</h4>
+        <p>Regardez des vidéos explicatives de qualité. Les professeurs partagent leurs méthodes de résolution en détail.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h4>Chat en Temps Réel</h4>
+        <p>Posez vos questions directement à vos professeurs en message privé ou participez aux groupes de travail.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h4>Groupes de Travail</h4>
+        <p>Rejoignez ou créez des groupes thématiques. Les professeurs peuvent inviter et animer des groupes dédiés.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h4>Suivi des Progrès</h4>
+        <p>Les professeurs voient quels étudiants suivent leurs cours et peuvent suivre leur engagement en temps réel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h4>Espace Sécurisé</h4>
+        <p>Authentification par JWT, gestion des rôles, modération des étudiants. Un environnement serein d'apprentissage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-it-works">
+  <div class="section-inner">
+    <div class="section-label">⚡ Comment ça marche</div>
+    <h2 class="section-title">Commencez en <span>4 étapes simples</span></h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h4>Créez votre compte</h4>
+        <p class="text-sm text-muted">Inscrivez-vous gratuitement en tant qu'étudiant ou professeur en quelques secondes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h4>Explorez les cours</h4>
+        <p class="text-sm text-muted">Parcourez le catalogue de cours et vidéos créés par nos professeurs experts.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h4>Rejoignez des groupes</h4>
+        <p class="text-sm text-muted">Participez à des groupes de discussion pour progresser collectivement.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h4>Progressez !</h4>
+        <p class="text-sm text-muted">Apprenez, posez des questions et atteignez vos objectifs mathématiques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POUR LES PROFESSEURS -->
+<section style="background:var(--white)">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
+      <div>
+        <div class="section-label">👩‍🏫 Pour les Professeurs</div>
+        <h2 class="section-title" style="font-size:2rem">Un espace complet pour <span>gérer vos cours</span></h2>
+        <p style="margin-bottom:1.5rem">Uploadez vos cours et vidéos, gérez vos étudiants, animez des groupes et communiquez directement avec eux.</p>
+        <ul style="display:flex;flex-direction:column;gap:.85rem">
+          <li class="flex items-center gap-3" style="color:var(--text-secondary)"><span style="color:var(--primary);font-size:1.2rem">✅</span>Dashboard de gestion complet</li>
+          <li class="flex items-center gap-3" style="color:var(--text-secondary)"><span style="color:var(--primary);font-size:1.2rem">✅</span>Upload de cours et vidéos</li>
+          <li class="flex items-center gap-3" style="color:var(--text-secondary)"><span style="color:var(--primary);font-size:1.2rem">✅</span>Gestion et modération des étudiants</li>
+          <li class="flex items-center gap-3" style="color:var(--text-secondary)"><span style="color:var(--primary);font-size:1.2rem">✅</span>Groupes de travail avec invitation</li>
+          <li class="flex items-center gap-3" style="color:var(--text-secondary)"><span style="color:var(--primary);font-size:1.2rem">✅</span>Chat privé avec chaque étudiant</li>
+        </ul>
+        <a href="/register.html?role=professor" class="btn btn-primary mt-6" style="margin-top:2rem">Rejoindre en tant que professeur →</a>
+      </div>
+      <div style="background:linear-gradient(135deg,#F3F0FF,#EDE9FE);border-radius:var(--radius-xl);padding:2rem;border:2px solid var(--border)">
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem;box-shadow:var(--shadow-sm)">
+          <div style="font-weight:700;margin-bottom:.75rem;font-size:.95rem">📊 Mes Statistiques</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div style="text-align:center;background:var(--secondary);border-radius:var(--radius);padding:1rem"><div style="font-size:1.5rem;font-weight:800;color:var(--primary)">12</div><div style="font-size:.8rem;color:var(--text-muted)">Cours publiés</div></div>
+            <div style="text-align:center;background:var(--secondary);border-radius:var(--radius);padding:1rem"><div style="font-size:1.5rem;font-weight:800;color:var(--primary)">248</div><div style="font-size:.8rem;color:var(--text-muted)">Étudiants</div></div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm)">
+          <div style="font-weight:700;margin-bottom:.75rem;font-size:.95rem">👥 Groupes actifs</div>
+          <div style="display:flex;flex-direction:column;gap:.6rem">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;background:var(--secondary);border-radius:var(--radius)"><span style="font-size:.9rem">Algèbre Avancée</span><span class="badge badge-primary">15 membres</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;background:var(--secondary);border-radius:var(--radius)"><span style="font-size:.9rem">Prépa Examen</span><span class="badge badge-primary">32 membres</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" style="background:var(--secondary)">
+  <div class="section-inner">
+    <div class="section-label">💬 Témoignages</div>
+    <h2 class="section-title">Ce que disent nos <span>utilisateurs</span></h2>
+    <div class="testimonials-grid">
+      <div class="card card-body testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Maths Expert a révolutionné ma façon d'apprendre. Les cours sont clairs, les vidéos excellentes et les professeurs très réactifs en chat !"</p>
+        <div class="testimonial-header" style="margin-top:1rem;margin-bottom:0">
+          <div class="testimonial-avatar">AM</div>
+          <div><div class="testimonial-name">Amina Mansouri</div><div class="testimonial-role">Étudiante — Terminale S</div></div>
+        </div>
+      </div>
+      <div class="card card-body testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"En tant que professeur, j'adore pouvoir gérer mes cours et communiquer directement avec mes étudiants. L'interface est magnifique et intuitive."</p>
+        <div class="testimonial-header" style="margin-top:1rem;margin-bottom:0">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#D97706,#F59E0B)">KB</div>
+          <div><div class="testimonial-name">Prof. Karim Benali</div><div class="testimonial-role">Professeur de Mathématiques</div></div>
+        </div>
+      </div>
+      <div class="card card-body testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Les groupes de travail sont top ! Mon professeur nous a créé un groupe pour la préparation du bac et on peut poser des questions à tout moment."</p>
+        <div class="testimonial-header" style="margin-top:1rem;margin-bottom:0">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">YO</div>
+          <div><div class="testimonial-name">Younes Oualid</div><div class="testimonial-role">Étudiant — Licence 1</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label" style="background:rgba(255,255,255,.15);color:white;display:inline-flex;margin-bottom:1.5rem">🚀 Rejoignez-nous dès maintenant</div>
+    <h2 style="color:white;margin-bottom:1rem">Prêt à exceller en <span style="color:var(--accent-glow)">Mathématiques</span> ?</h2>
+    <p style="color:rgba(255,255,255,.75);margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto">Rejoignez des milliers d'étudiants et de professeurs qui font confiance à Maths Expert pour leurs études.</p>
+    <div class="cta-buttons">
+      <a href="/register.html" class="btn btn-white btn-lg">Créer un compte gratuit</a>
+      <a href="/login.html" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.4);color:white">Se connecter</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="logo-icon">∑</div>Maths Expert</div>
+        <p style="margin-top:.75rem">La plateforme éducative de référence pour apprendre les mathématiques avec les meilleurs experts.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Plateforme</h5>
+        <ul>
+          <li><a href="#features">Fonctionnalités</a></li>
+          <li><a href="#how">Comment ça marche</a></li>
+          <li><a href="/register.html">S'inscrire</a></li>
+          <li><a href="/login.html">Se connecter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Pour les Étudiants</h5>
+        <ul>
+          <li><a href="#">Catalogue de cours</a></li>
+          <li><a href="#">Vidéos pédagogiques</a></li>
+          <li><a href="#">Groupes de travail</a></li>
+          <li><a href="#">Chat avec profs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Pour les Professeurs</h5>
+        <ul>
+          <li><a href="#">Publier un cours</a></li>
+          <li><a href="#">Upload de vidéos</a></li>
+          <li><a href="#">Gérer les étudiants</a></li>
+          <li><a href="#">Créer des groupes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Maths Expert. Tous droits réservés. Conçu avec ❤️ pour l'excellence éducative.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Counter animation
+  function animateCounters() {
+    const counters = [
+      { id: 'stat-students', target: 1240, suffix: '+' },
+      { id: 'stat-courses',  target: 89,   suffix: '' },
+      { id: 'stat-profs',    target: 34,   suffix: '' },
+    ];
+    counters.forEach(({ id, target, suffix }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let current = 0;
+      const increment = target / 60;
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, target);
+        el.textContent = Math.floor(current) + suffix;
+        if (current >= target) clearInterval(timer);
+      }, 20);
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounters(); observer.disconnect(); } });
+  });
+  observer.observe(document.getElementById('hero'));
+
+  // Pre-fill role from URL
+  const params = new URLSearchParams(window.location.search);
+</script>
+</body>
+</html>

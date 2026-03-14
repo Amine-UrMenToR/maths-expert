@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion — Maths Expert</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <div id="toast-container" class="toast-container"></div>
+    <div class="auth-page">
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <div class="logo-big">∑</div>
+                <h2>Maths Expert</h2>
+                <p>Votre espace d'excellence mathématique</p>
+                <ul class="features-list">
+                    <li><span class="icon">📚</span> Accès à tous les cours</li>
+                    <li><span class="icon">🎥</span> Vidéos pédagogiques</li>
+                    <li><span class="icon">💬</span> Chat avec vos profs</li>
+                    <li><span class="icon">👥</span> Groupes de travail</li>
+                </ul>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-box">
+                <a href="/"
+                    style="display:inline-flex;align-items:center;gap:.4rem;color:var(--text-muted);font-size:.88rem;margin-bottom:1.5rem">←
+                    Retour à l'accueil</a>
+                <h1>Bon retour ! 👋</h1>
+                <p class="subtitle">Connectez-vous à votre compte Maths Expert</p>
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" id="email" class="form-control" placeholder="vous@exemple.fr" required
+                            autocomplete="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required
+                            autocomplete="current-password" />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full" style="font-size:1rem;padding:.9rem">Se
+                        connecter</button>
+                </form>
+
+                <div class="auth-divider"><span>Pas encore de compte ?</span></div>
+                <a href="/register.html" class="btn btn-outline w-full">Créer un compte gratuitement</a>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/js/auth.js"></script>
+</body>
+
+</html>

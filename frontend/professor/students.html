@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des étudiants — Maths Expert</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <div id="toast-container" class="toast-container"></div>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-icon">∑</div>
+                <div class="sidebar-logo">Maths Expert</div>
+            </div>
+            <div class="sidebar-user">
+                <div class="user-avatar" style="background:linear-gradient(135deg,#D97706,#F59E0B)"><span
+                        class="user-avatar-letter">P</span></div>
+                <div>
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section-label">Tableau de bord</div>
+                <a class="nav-item" href="/professor/dashboard.html"><span class="nav-icon">🏠</span>Vue générale</a>
+                <a class="nav-item" href="/professor/upload.html"><span class="nav-icon">📤</span>Publier un cours</a>
+                <a class="nav-item active" href="/professor/students.html"><span class="nav-icon">🎓</span>Mes
+                    étudiants</a>
+                <a class="nav-item" href="/professor/chat.html"><span class="nav-icon">💬</span>Messages</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-ghost w-full">🚪 Se déconnecter</button>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <div class="topbar">
+                <div class="topbar-title">Mes étudiants 🎓</div>
+                <div class="topbar-right">
+                    <div class="search-bar">
+                        <span>🔍</span>
+                        <input type="text" id="student-search" placeholder="Rechercher un étudiant…" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h3>Tous les étudiants</h3>
+                        <p>Gérez les étudiants de votre plateforme</p>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Étudiant</th>
+                                <th>Cours inscrits</th>
+                                <th>Inscrit le</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="students-tbody">
+                            <tr>
+                                <td colspan="5">
+                                    <div class="spinner"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/js/professor.js"></script>
+</body>
+
+</html>

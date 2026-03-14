@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages — Maths Expert Professeur</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/chat.css" />
+</head>
+
+<body>
+    <div id="toast-container" class="toast-container"></div>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-icon">∑</div>
+                <div class="sidebar-logo">Maths Expert</div>
+            </div>
+            <div class="sidebar-user">
+                <div class="user-avatar" style="background:linear-gradient(135deg,#D97706,#F59E0B)"><span
+                        class="user-avatar-letter">P</span></div>
+                <div>
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section-label">Tableau de bord</div>
+                <a class="nav-item" href="/professor/dashboard.html"><span class="nav-icon">🏠</span>Vue générale</a>
+                <a class="nav-item" href="/professor/upload.html"><span class="nav-icon">📤</span>Publier un cours</a>
+                <a class="nav-item" href="/professor/students.html"><span class="nav-icon">🎓</span>Mes étudiants</a>
+                <a class="nav-item active" href="/professor/chat.html"><span class="nav-icon">💬</span>Messages</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-ghost w-full">🚪 Se déconnecter</button>
+            </div>
+        </aside>
+
+        <div class="main-content" style="padding:0;overflow:hidden">
+            <div class="chat-layout">
+                <!-- Chat Sidebar -->
+                <div class="chat-sidebar">
+                    <div class="chat-sidebar-header">
+                        <h4>💬 Messagerie</h4>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('create-group-modal')">+
+                            Groupe</button>
+                    </div>
+                    <div class="chat-tabs">
+                        <div class="chat-tab active" onclick="switchTab('groups', this)">Mes Groupes</div>
+                        <div class="chat-tab" onclick="switchTab('privates', this)">Messages privés</div>
+                    </div>
+                    <div class="chat-list" id="groups-tab-content">
+                        <div id="groups-list">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                    <div class="chat-list hidden" id="privates-tab-content">
+                        <div id="privates-list">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Main -->
+                <div class="chat-main">
+                    <div id="chat-empty-state" class="chat-empty" style="flex:1;display:flex">
+                        <div class="chat-empty-icon">💬</div>
+                        <h4>Sélectionnez une conversation</h4>
+                        <p>Choisissez un groupe ou un étudiant pour commencer à discuter</p>
+                        <button class="btn btn-primary btn-sm mt-4" onclick="openModal('create-group-modal')"
+                            style="margin-top:1rem">+ Créer un groupe</button>
+                    </div>
+
+                    <div id="chat-active" class="hidden"
+                        style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+                        <div class="chat-header">
+                            <div class="chat-header-info">
+                                <div>
+                                    <h4 id="chat-header-name"></h4>
+                                    <div class="sub" id="chat-header-sub"></div>
+                                </div>
+                            </div>
+                            <div class="chat-header-actions">
+                                <button class="btn btn-ghost btn-sm" id="invite-student-btn"
+                                    title="Inviter un étudiant">👤 Inviter</button>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="messages-container"></div>
+                        <div class="chat-input-area">
+                            <form id="send-form">
+                                <div class="chat-input-box">
+                                    <textarea id="msg-input" placeholder="Écrivez votre message…" rows="1"></textarea>
+                                    <button type="submit" class="send-btn">➤</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Members panel -->
+                <div class="members-panel hidden" id="members-panel">
+                    <h5>Membres du groupe</h5>
+                    <div id="members-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Créer un groupe -->
+    <div class="modal-overlay" id="create-group-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>👥 Créer un groupe</h3>
+                <button class="modal-close" onclick="closeModal('create-group-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="create-group-form">
+                    <div class="form-group">
+                        <label>Nom du groupe *</label>
+                        <input type="text" id="group-name-input" class="form-control"
+                            placeholder="Ex: Prépa Bac S — Algèbre" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Description (optionnel)</label>
+                        <textarea id="group-desc-input" class="form-control" rows="2"
+                            placeholder="Décrivez l'objectif du groupe…"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">Créer le groupe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Inviter un étudiant -->
+    <div class="modal-overlay" id="invite-student-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>👤 Inviter un étudiant</h3>
+                <button class="modal-close" onclick="closeModal('invite-student-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Sélectionner l'étudiant</label>
+                    <select id="invite-student-select" class="form-control" size="5" style="height:auto">
+                        <option value="">Chargement…</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('invite-student-modal')">Annuler</button>
+                <button class="btn btn-primary" id="invite-confirm-btn">Inviter</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab, el) {
+            document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('groups-tab-content').classList.add('hidden');
+            document.getElementById('privates-tab-content').classList.add('hidden');
+            document.getElementById(tab + '-tab-content').classList.remove('hidden');
+        }
+    </script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script type="module" src="/js/chat.js"></script>
+</body>
+
+</html>

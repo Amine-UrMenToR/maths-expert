@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publier un cours — Maths Expert</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <div id="toast-container" class="toast-container"></div>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-icon">∑</div>
+                <div class="sidebar-logo">Maths Expert</div>
+            </div>
+            <div class="sidebar-user">
+                <div class="user-avatar" style="background:linear-gradient(135deg,#D97706,#F59E0B)"><span
+                        class="user-avatar-letter">P</span></div>
+                <div>
+                    <div class="user-name"></div>
+                    <div class="user-role"></div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section-label">Tableau de bord</div>
+                <a class="nav-item" href="/professor/dashboard.html"><span class="nav-icon">🏠</span>Vue générale</a>
+                <a class="nav-item active" href="/professor/upload.html"><span class="nav-icon">📤</span>Publier un
+                    cours</a>
+                <a class="nav-item" href="/professor/students.html"><span class="nav-icon">🎓</span>Mes étudiants</a>
+                <a class="nav-item" href="/professor/chat.html"><span class="nav-icon">💬</span>Messages</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-ghost w-full">🚪 Se déconnecter</button>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <div class="topbar">
+                <div class="topbar-title">Publier du contenu 📤</div>
+            </div>
+            <div class="page-content">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start">
+
+                    <!-- Créer un cours -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>📚 Créer un cours</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="course-form">
+                                <div class="form-group">
+                                    <label>Titre du cours *</label>
+                                    <input type="text" id="course-title" class="form-control"
+                                        placeholder="Ex: Algèbre Linéaire — Introduction" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Niveau</label>
+                                    <select id="course-level" class="form-control">
+                                        <option value="Débutant">Débutant</option>
+                                        <option value="Intermédiaire">Intermédiaire</option>
+                                        <option value="Avancé">Avancé</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea id="course-desc" class="form-control"
+                                        placeholder="Décrivez brièvement ce que les étudiants vont apprendre…"
+                                        rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contenu du cours</label>
+                                    <textarea id="course-content" class="form-control"
+                                        placeholder="Rédigez le contenu complet du cours ici…" rows="6"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-full">✅ Publier le cours</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Upload vidéo -->
+                    <div>
+                        <div class="card" style="margin-bottom:1.5rem">
+                            <div class="card-header">
+                                <h4>🎥 Uploader une vidéo</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="video-form">
+                                    <div class="form-group">
+                                        <label>Titre de la vidéo *</label>
+                                        <input type="text" id="video-title" class="form-control"
+                                            placeholder="Ex: Résolution d'équations différentielles" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cours associé (optionnel)</label>
+                                        <select name="course_id" class="form-control">
+                                            <option value="">Chargement…</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="video-desc" class="form-control"
+                                            placeholder="Décrivez le contenu de la vidéo…" rows="2"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fichier vidéo *</label>
+                                        <div class="upload-zone" id="drop-zone">
+                                            <div class="upload-icon">🎬</div>
+                                            <h4>Glissez-déposez ou cliquez</h4>
+                                            <p>MP4, AVI, MOV — Taille max : 500 Mo</p>
+                                        </div>
+                                        <input type="file" id="video-file" accept="video/*" style="display:none" />
+                                    </div>
+                                    <div class="progress-bar hidden mb-4" id="upload-progress"
+                                        style="margin-bottom:1rem">
+                                        <div class="progress-fill" style="width:100%;animation:spin 1s linear infinite">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-full">⬆️ Uploader la vidéo</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Mes vidéos -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>🎞️ Mes vidéos</h4>
+                            </div>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Titre</th>
+                                            <th>Cours</th>
+                                            <th>Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="my-videos-tbody">
+                                        <tr>
+                                            <td colspan="4">
+                                                <div class="spinner"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mes cours publiés -->
+                <div class="page-header" style="margin-top:2.5rem">
+                    <div>
+                        <h3>Mes cours publiés</h3>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Niveau</th>
+                                <th>Inscrits</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="my-courses-tbody">
+                            <tr>
+                                <td colspan="5">
+                                    <div class="spinner"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/js/professor.js"></script>
+</body>
+
+</html>
