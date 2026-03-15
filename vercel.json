@@ -9,11 +9,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://maths-expert-backend.onrender.com/api/$1"
+      "destination": "https://maths-expert.onrender.com/api/$1"
     },
     {
       "source": "/socket.io/(.*)",
-      "destination": "https://maths-expert-backend.onrender.com/socket.io/$1"
+      "destination": "https://maths-expert.onrender.com/socket.io/$1"
     },
     {
       "source": "/(.*)",
