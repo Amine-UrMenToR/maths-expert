@@ -5,7 +5,7 @@
 // Define API base url based on location
 // For production, replace the 'YOUR_RENDER_URL' string with the actual Render app backend URL 
 const isProd = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-const PROD_API_URL = 'https://maths-expert-backend.onrender.com/api'; 
+const PROD_API_URL = '/api'; 
 const DEV_API_URL = 'http://localhost:3000/api';
 export const API_BASE = isProd ? PROD_API_URL : DEV_API_URL;
 

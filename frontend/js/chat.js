@@ -9,8 +9,8 @@ const token = getToken();
 
 import { API_BASE } from './api.js';
 
-// Get just the base URL by removing '/api'
-const socketUrl = API_BASE.replace(/\/api$/, '');
+// Get just the base URL by removing '/api'. If API_BASE is just '/api' (Vercel proxy), use origin.
+const socketUrl = API_BASE === '/api' ? window.location.origin : API_BASE.replace(/\/api$/, '');
 // Socket.io (chargé via CDN dans le HTML)
 const socket = io(socketUrl, { auth: { token } });
 
