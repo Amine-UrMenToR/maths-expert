@@ -16,7 +16,7 @@ const io = new Server(server, {
 // Middleware
 const corsOptions = { origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], allowedHeaders: ['Content-Type', 'Authorization'] };
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions), (req, res) => res.sendStatus(200));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
