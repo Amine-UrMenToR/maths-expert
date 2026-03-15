@@ -1,0 +1,9 @@
+{
+  "name": "maths-expert",
+  "version": "1.0.0",
+  "description": "Maths Expert Platform",
+  "scripts": {
+    "postinstall": "cd backend && npm install",
+    "start": "cd backend && npm start"
+  }
+}
